@@ -20,10 +20,13 @@ const theme = createTheme();
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [signIn] = useMutation<SignInResponse>(SIGN_IN);
+  // 戻り値のsignInは、mutationのリクエストを実行するための関数であり、関数を実行するとリクエストが投げられる
+  const [signIn] = useMutation<SignInResponse>(SIGN_IN); // 引数は実行したいmutation
+  // サインインが失敗したかどうか
   const [failSignIn, setFailSignIn] = useState(false);
   const navigate  = useNavigate();
 
+  // 以下追加
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const signInInput = {
@@ -67,6 +70,7 @@ export default function SignIn() {
             Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            {/* 以下要素追加 */}
             <TextField
               margin="normal"
               required
@@ -91,7 +95,8 @@ export default function SignIn() {
               value={password}
               onChange={(e) => {setPassword(e.target.value)}}
             />
-            {failSignIn && <Typography color="red">メールアドレスを確認してください</Typography>}
+            {/* 追加 */}
+            {failSignIn && <Typography color="red">メールアドレスまたはパスワードを確認してください</Typography>}
             <Button
               type="submit"
               fullWidth

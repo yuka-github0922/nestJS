@@ -16,8 +16,10 @@ export default function AddTask({ userId } : { userId: number }) {
   const [name, setName] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [description, setDescription] = useState('');
+  // 入力された値をちぇっくするためのstate
   const [isInvalidName, setIsInvalidName] = useState(false);
   const [isInvalidDueDate, setIsInvalidDueDate] = useState(false);
+  // gqlのコマンド登録したら
   const [createTask] = useMutation<{createTask: Task}>(CREATE_TASK);
   const navigate = useNavigate();
 
@@ -57,7 +59,9 @@ export default function AddTask({ userId } : { userId: number }) {
 
       try {
         await createTask({
+          // mutationを実行する
           variables: { createTaskInput },
+          // 作成されたタスクも表示したい
           refetchQueries: [{ query: GET_TASKS, variables: { userId } }]
         });
         resetState();
@@ -92,7 +96,7 @@ export default function AddTask({ userId } : { userId: number }) {
       <Button variant="contained" sx={{width: '270px'}} onClick={handleClickOpen}>
         Add Task
       </Button>
-      <Dialog fullWidth={true} open={open} onClose={handleClose}>
+      <Dialog fullWidth={true} open={open} onClose={handleClose} maxWidth='sm'>
         <DialogTitle>Add Task</DialogTitle>
         <DialogContent>
           <TextField
@@ -112,7 +116,7 @@ export default function AddTask({ userId } : { userId: number }) {
             margin="normal"
             id="due-date"
             label="Due Date"
-            placeholder='yyyy-mm-ss'
+            placeholder='yyyy-mm-dd'
             fullWidth
             required
             value={dueDate}

@@ -49,6 +49,7 @@ export default function SignUp() {
         }
         localStorage.getItem('token') && navigate('/');
       }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.log(err.message);
       alert('良きせぬエラーが発生しました。');
@@ -75,6 +76,7 @@ export default function SignUp() {
             Sign up
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            {/* 以下修正 */}
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -125,6 +127,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
+                {/* 以下修正 */}
                 <Link href="/signin" variant="body2">
                   Already have an account? Sign in
                 </Link>

@@ -44,6 +44,7 @@ export class TaskResolver {
   }
 
   @Mutation(() => TaskModel)
+  @UseGuards(JwtAuthGuard) // tokenが含まれている場合のみ実行される
   async deleteTask(@Args('id', { type: () => Int }) id: number): Promise<Task> {
     return await this.taskService.deleteTask(id);
   }

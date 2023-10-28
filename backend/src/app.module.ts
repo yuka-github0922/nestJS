@@ -22,6 +22,6 @@ import { AuthModule } from './auth/auth.module';
     UserModule,
     AuthModule,
   ],
-  providers: [TaskResolver, TaskService],
+  providers: [TaskResolver, TaskService], // @Injectablesデコレータが付与されているクラスを指定する（DIができるようになる）
 })
 export class AppModule {}
